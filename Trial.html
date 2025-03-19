@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Quality Monitoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #87CEFA, #4682B4);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .input-group:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        label {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 80%;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        /* Info Section */
+        .info-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f4f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .info-text {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .info-text h3 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .info-text ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-text li {
+            font-size: 18px;
+            padding: 6px 0;
+        }
+
+        .info-text li::before {
+            content: "💧";
+            padding-right: 8px;
+            color: #4CAF50;
+        }
+
+        .info-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .info-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>💧 Water Quality Monitoring System</h2>
+        
+        <!-- Input Fields -->
+        <div class="input-grid">
+            <div class="input-group">
+                <label for="ph">pH Level</label>
+                <input type="number" id="ph" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="hardness">Hardness</label>
+                <input type="number" id="hardness">
+            </div>
+            <div class="input-group">
+                <label for="solids">Solids</label>
+                <input type="number" id="solids">
+            </div>
+            <div class="input-group">
+                <label for="chloramines">Chloramines</label>
+                <input type="number" id="chloramines" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="sulfate">Sulfate</label>
+                <input type="number" id="sulfate">
+            </div>
+            <div class="input-group">
+                <label for="conductivity">Conductivity</label>
+                <input type="number" id="conductivity">
+            </div>
+            <div class="input-group">
+                <label for="organic_carbon">Organic Carbon</label>
+                <input type="number" id="organic_carbon" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="trihalomethanes">Trihalomethanes</label>
+                <input type="number" id="trihalomethanes" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="turbidity">Turbidity</label>
+                <input type="number" id="turbidity" step="0.1">
+            </div>
+        </div>
+
+        <button onclick="checkQuality()">Check Quality</button>
+    </div>
+
+    <!-- Water Quality Highlights -->
+    <div class="info-container">
+        <div class="info-text">
+            <h3>🌊 Water Quality Control System Highlights</h3>
+            <ul>
+                <li>✔️ Ensures safe and potable drinking water.</li>
+                <li>✔️ Monitors key water parameters like pH, hardness, and turbidity.</li>
+                <li>✔️ Detects contaminants for early prevention of health risks.</li>
+                <li>✔️ Uses AI-based prediction models for accurate analysis.</li>
+                <li>✔️ Helps in maintaining environmental and public health standards.</li>
+            </ul>
+        </div>
+        <div class="info-image">
+            <img src="quality.jpeg" alt="Water Quality Monitoring">
+        </div>
+    </div>
+
+    <script>
+        function checkQuality() {
+            let features = [
+                parseFloat(document.getElementById("ph").value),
+                parseFloat(document.getElementById("hardness").value),
+                parseFloat(document.getElementById("solids").value),
+                parseFloat(document.getElementById("chloramines").value),
+                parseFloat(document.getElementById("sulfate").value),
+                parseFloat(document.getElementById("conductivity").value),
+                parseFloat(document.getElementById("organic_carbon").value),
+                parseFloat(document.getElementById("trihalomethanes").value),
+                parseFloat(document.getElementById("turbidity").value),
+            ];
+
+            fetch("http://127.0.0.1:8000/api/predict/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ features: features }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                localStorage.setItem("water_quality_result", data.prediction);
+                window.location.href = "result.html";
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Quality Monitoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #87CEFA, #4682B4);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .input-group:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        label {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 80%;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        #prediction {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #FFD700;
+        }
+
+        /* Water Quality Highlights Section */
+        .info-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f4f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .info-text {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .info-text h3 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .info-text ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-text li {
+            font-size: 18px;
+            padding: 6px 0;
+        }
+
+        .info-text li::before {
+            content: "💧";
+            padding-right: 8px;
+            color: #4CAF50;
+        }
+
+        .info-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .info-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>💧 Water Quality Monitoring System</h2>
+        
+        <!-- Input Fields in Matrix Format -->
+       <!--<div class="input-grid">
+            <div class="input-group">
+                <label for="ph">pH Level</label>
+                <input type="number" id="ph" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="hardness">Hardness</label>
+                <input type="number" id="hardness">
+            </div>
+            <div class="input-group">
+                <label for="solids">Solids</label>
+                <input type="number" id="solids">
+            </div>
+            <div class="input-group">
+                <label for="chloramines">Chloramines</label>
+                <input type="number" id="chloramines" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="sulfate">Sulfate</label>
+                <input type="number" id="sulfate">
+            </div>
+            <div class="input-group">
+                <label for="conductivity">Conductivity</label>
+                <input type="number" id="conductivity">
+            </div>
+            <div class="input-group">
+                <label for="organic_carbon">Organic Carbon</label>
+                <input type="number" id="organic_carbon" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="trihalomethanes">Trihalomethanes</label>
+                <input type="number" id="trihalomethanes" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="turbidity">Turbidity</label>
+                <input type="number" id="turbidity" step="0.1">
+            </div>
+        </div>
+
+        <button onclick="checkQuality()">Check Quality</button>
+
+        <p id="prediction"></p>
+
+        <!-- Water Quality Highlights -->
+       <!--  <div class="info-container">
+            <div class="info-text">
+                <h3>🌊 Water Quality Control System Highlights</h3>
+                <ul>
+                    <li>✔️ Ensures safe and potable drinking water.</li>
+                    <li>✔️ Monitors key water parameters like pH, hardness, and turbidity.</li>
+                    <li>✔️ Detects contaminants for early prevention of health risks.</li>
+                    <li>✔️ Uses AI-based prediction models for accurate analysis.</li>
+                    <li>✔️ Helps in maintaining environmental and public health standards.</li>
+                </ul>
+            </div>
+            <div class="info-image">
+                <img src="quality.jpeg" alt="Water Quality Monitoring">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkQuality() {
+            let features = [
+                parseFloat(document.getElementById("ph").value),
+                parseFloat(document.getElementById("hardness").value),
+                parseFloat(document.getElementById("solids").value),
+                parseFloat(document.getElementById("chloramines").value),
+                parseFloat(document.getElementById("sulfate").value),
+                parseFloat(document.getElementById("conductivity").value),
+                parseFloat(document.getElementById("organic_carbon").value),
+                parseFloat(document.getElementById("trihalomethanes").value),
+                parseFloat(document.getElementById("turbidity").value),
+            ];
+
+            fetch("http://127.0.0.1:8000/api/predict/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ features: features }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("prediction").innerText = "Prediction: " + data.prediction;
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+
+</body>
+</html>-->
