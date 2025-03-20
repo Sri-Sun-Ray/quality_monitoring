@@ -24,7 +24,7 @@ def home(request):
 
 
 urlpatterns = [
-    path("api/", home),
+    path("", home),
     path('admin/', admin.site.urls),
     path('api/', include('prediction.urls')),
 ]
